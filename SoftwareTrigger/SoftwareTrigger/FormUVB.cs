@@ -25,18 +25,17 @@ namespace SoftwareTrigger
         private Graphics _g = null;
         bool m_bShowByGDI;                  /* 是否使用GDI绘图 */
         private Bitmap bitmap = null;       /* 临时采集的帧图像 */
-        private String strSavePath;
-        private String strSavePathOK;
-        private String strSavePathNG;
-        private Int32 nExpTime;
-        private float fCamGain;
+        private String strSavePath;    // 图片保存的总目录
+        private String strSavePathOK;  // OK文件的保存路径
+        private String strSavePathNG;  // NG文件的保存路径
+        private Int32 nExpTime;  // 曝光时间
+        private float fCamGain;  // 相机增益 
         private bool bVideoMode; // 是否为录像模式
 
         private HDevelopExport detectInstanceDyn;
         private HDevelopExport1 detectInstanceNorm;
-        private ConfigInfo myConfig;
+        private ConfigInfo myConfig; // 检测参数配置类
 
-//        private string strSavePath = "C:\\Users\\Administrator\\Desktop\\captured\\";
         private String strFileName;
         private Image imgOri;
         // private Bitmap imgDone = null;
@@ -59,22 +58,25 @@ namespace SoftwareTrigger
             detectInstanceNorm = null;
         }
 
+        /* 设置图片保存路径 */
         public void SetSavePath(String strPath)
         {
             strSavePath = strPath + "\\";
         }
-
+        
+        /* 设置曝光时间 */
         public void SetExpTime(Int32 nTime)
         {
             nExpTime = nTime;
         }
 
+        /* 设置相机增益 */
         public void SetCamGain(float fGain)
         {
             fCamGain = fGain;
         }
 
-        // check and create folder
+        /* 检查路径是否存在，如果不存在则创建该路径 */
         private void CheckAndCreatePath(String strPath)
         {
             if (!Directory.Exists(strPath))
@@ -86,6 +88,7 @@ namespace SoftwareTrigger
             }
         }
 
+        /* 当界面检测参数改变时，数据写回config变量 */
         private void Pro_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             myConfig = Pro.SelectedObject as ConfigInfo;
@@ -290,7 +293,7 @@ namespace SoftwareTrigger
             base.OnClosed(e);
         }
 
-        /* 打开相机 */
+        /* 打开相机按钮事件 */
         private void btnOpen_Click(object sender, EventArgs e)
         {
             try
@@ -410,6 +413,7 @@ namespace SoftwareTrigger
             }
         }
 
+        /* 检测按钮事件 */
         private void btnDetect_Click(object sender, EventArgs e)
         {
             pbImage.Visible = false;
@@ -486,6 +490,7 @@ namespace SoftwareTrigger
             pbImage.Image = imgOri;
         }
 
+        /* 显示原图按钮事件 */
         private void btnShowImg_Click(object sender, EventArgs e)
         {
             // hWindowCtrl.BackgroundImage = pbImage.Image;
@@ -495,12 +500,14 @@ namespace SoftwareTrigger
             // pbImage.Image = imgOri;
         }
 
+        /* 单击设置菜单事件 */
         private void ToolStripSet_Click(object sender, EventArgs e)
         {
             FormConfig frmCfg = new FormConfig(this, null);
             frmCfg.Show();
         }
 
+        /* 工作模式改变事件 */
         private void chkboxMode_CheckedChanged(object sender, EventArgs e)
         {
             if (chkboxMode.Checked)

@@ -33,7 +33,6 @@ namespace SoftwareTrigger
             set { _StartTest2 = value; }
         }
 
-
         private Int32 _StartTest3 = 4;
         [CategoryAttribute("动态二值化阈值"), DescriptionAttribute("设置动态二值化阈值")]
         public Int32 动态二值化阈值

@@ -88,6 +88,7 @@ public class HDevelopExport1
         // GenertateRGBBitmap(imgProc, out imgDone);
     }
 
+    /* 将Halcon image 转换为 bitmap 格式：《耗时有点长》 */
     private void GenertateRGBBitmap(HObject image, out Bitmap res)
     {
         HTuple hred, hgreen, hblue, type, width, height;
@@ -109,7 +110,6 @@ public class HDevelopExport1
                 bptr[nIndex] = b[i];
                 bptr[nIndex + 1] = g[i];
                 bptr[nIndex + 2] = r[i];
-                // bptr[nIndex + 3] = 255;
                 nIndex += 4;
             }
         }
